@@ -52,6 +52,8 @@ Error conditions:
 --------------------------------------------------------------------------
 """
 import operator
+from builtins import input
+# Use pip install future for builtins
 
 # ------------------------------------------------------------------------
 # Constants
@@ -67,7 +69,12 @@ operators = {
     "+" : operator.add,
     "-" : operator.sub,
     "*" : operator.mul,
-    "/" : operator.truediv
+    "/" : operator.truediv,
+    "%" : operator.mod,
+    "^" : operator.pow,
+    ">>" : operator.rshift,
+    "<<" : operator.lshift
+    
 }
 
 # ------------------------------------------------------------------------
@@ -83,7 +90,7 @@ def get_user_input():
     try:
         in1 = float(input("Enter first number:  "))
         in2 = float(input("Enter second number: "))
-        op  = input("Enter operator (+, -, *, /): ")
+        op  = input("Enter operator (+, -, *, /, %, ^, <<, >>): ")
     except ValueError:
         print("Input not a valid number.")
 
@@ -109,6 +116,10 @@ if __name__ == "__main__":
         # Check if the operator is valid
         try:
             operation = operators[op]
+            if (op == "<<") or (op == ">>"):
+                in2 = int(in2)
+                in1 = int(in1)
+                
         except KeyError:
             print("Operator is not valid.")
             break

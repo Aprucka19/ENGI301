@@ -4,7 +4,7 @@
 Simple Calculator
 --------------------------------------------------------------------------
 License:   
-Copyright 2021 Erik Welsh
+Copyright 2021 Alex Prucka
 
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:
@@ -44,6 +44,10 @@ Operations:
   - subtraction
   - multiplication
   - division
+  - Exponentiation
+  - Modulation
+  - Left Shift
+  - Right Shift
 
 Error conditions:
   - Invalid operator --> Program should exit

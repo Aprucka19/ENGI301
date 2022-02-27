@@ -2,6 +2,12 @@ from time import sleep
 import pigpio
 from guizero import App, Text, PushButton, Slider, TextBox, Box, TitleBox
 import Stepper, Motor
+import RPi.GPIO as GPIO
+#import sys
+#import signal
+
+pi = pigpio.pi()
+GPIO.setmode(GPIO.BCM)
 
 
 ShakeStepper = Stepper.Stepper(8, 23, 7)
@@ -12,15 +18,22 @@ Pump2 = Motor.Motor(2, 3, 4)
 Pump3 = Motor.Motor(17, 27, 22)
 Pump4 = Motor.Motor(10, 9, 11)
 
-ShakeMotor = Motor.Motor(24, 5, 6)
-IceMotor = Motor.Motor(13, 19, 26)
+IceMotor = Motor.Motor(24, 5, 6)
+ShakeMotor = Motor.Motor(26, 19, 13)
+Optical1 = 12
+
+GPIO.setup(Optical1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 
 
 def changeText(msg, new):
 	msg.value = new
 
+def triggerPump(channel):
+	Pump1.setEn(GPIO.input(Optical1))
 
+
+GPIO.add_event_detect(Optical1, GPIO.BOTH, callback=triggerPump)
 
 
 app = App(layout = "grid")
@@ -52,18 +65,22 @@ ShakeDmsg = Text(box2,text = str(ShakeStepper.getDir()), grid = [3,1])
 ShakeM = PushButton(box2, text="Shake Move", grid = [4,1], command=lambda:[ShakeStepper.movetoggle(), changeText(ShakeMmsg, ShakeStepper.getDuty())])
 ShakeMmsg = Text(box2,text = str(ShakeStepper.getDuty()), grid = [5,1])
 
-ShakeT = PushButton(box2, text="Shake Toggle", grid = [0,2], command=lambda:[ShakeStepper.enabletoggle(), changeText(ShakeTmsg, ShakeStepper.getEn())])
-ShakeTmsg = Text(box2,text = str(ShakeStepper.getEn()), grid = [1,2])
-ShakeD = PushButton(box2, text="Shake Direction", grid = [2,2], command=lambda:[ShakeStepper.dirtoggle(), changeText(ShakeDmsg, ShakeStepper.getDir())])
-ShakeDmsg = Text(box2,text = str(ShakeStepper.getDir()), grid = [3,2])
-ShakeM = PushButton(box2, text="Shake Move", grid = [4,2], command=lambda:[ShakeStepper.movetoggle(), changeText(ShakeMmsg, ShakeStepper.getDuty())])
-ShakeMmsg = Text(box2,text = str(ShakeStepper.getDuty()), grid = [5,2])
+SlideT = PushButton(box2, text="Slide Toggle", grid = [0,2], command=lambda:[SlideStepper.enabletoggle(), changeText(SlideTmsg, SlideStepper.getEn())])
+SlideTmsg = Text(box2,text = str(SlideStepper.getEn()), grid = [1,2])
+SlideD = PushButton(box2, text="Slide Direction", grid = [2,2], command=lambda:[SlideStepper.dirtoggle(), changeText(SlideDmsg, SlideStepper.getDir())])
+SlideDmsg = Text(box2,text = str(SlideStepper.getDir()), grid = [3,2])
+SlideM = PushButton(box2, text="Slide Move", grid = [4,2], command=lambda:[SlideStepper.movetoggle(), changeText(SlideMmsg, SlideStepper.getDuty())])
+SlideMmsg = Text(box2,text = str(SlideStepper.getDuty()), grid = [5,2])
 
 box3 = TitleBox(app,"Motor Control", layout = "grid", grid = [0,2], align = "left")
-ShakeMotorT = PushButton(box3, text="Shake Motor Toggle", grid = [0,1], command=ShakeMotor.enabletoggle)
-ShakeMotorD = PushButton(box3, text="Shake Motor Direction", grid = [1,1], command=ShakeMotor.dirtoggle)
-IceMotorT = PushButton(box3, text="Ice Motor Toggle", grid = [0,2], command=IceMotor.enabletoggle)
-IceMotorD = PushButton(box3, text="Ice Motor Direction", grid = [1,2], command=IceMotor.dirtoggle)
+ShakeMotorT = PushButton(box3, text="Shake Motor Toggle", grid = [0,1], command=lambda:[ShakeMotor.enabletoggle(), changeText(ShakeMotorTmsg, ShakeMotor.getEn())])
+ShakeMotorTmsg = Text(box3, text = str(ShakeMotor.getEn()), grid = [1,1])
+ShakeMotorD = PushButton(box3, text="Shake Motor Direction", grid = [2,1], command=lambda:[ShakeMotor.dirtoggle(), changeText(ShakeMotorDmsg, ShakeMotor.getDir())])
+ShakeMotorDmsg = Text(box3, text = str(ShakeMotor.getDir()), grid = [3,1])
+IceMotorT = PushButton(box3, text="Ice Motor Toggle", grid = [0,2], command=lambda:[IceMotor.enabletoggle(), changeText(IceMotorTmsg, IceMotor.getEn())])
+IceMotorTmsg = Text(box3, text = str(IceMotor.getEn()), grid = [1,2])
+IceMotorD = PushButton(box3, text="Ice Motor Direction", grid = [2,2], command=lambda:[IceMotor.dirtoggle(), changeText(IceMotorDmsg, IceMotor.getDir())])
+IceMotorDmsg = Text(box3, text = str(IceMotor.getDir()), grid = [3,2])
 
 
 app.display()

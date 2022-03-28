@@ -58,7 +58,7 @@ SlideStepper = Stepper.Stepper(16, 21, 20)
 ShakeStepper.setFreq(1200)
 
 #Initilize the pumps
-Pump1 = Motor.Motor(14, 15, 18)
+Pump1 = Motor.Motor(15, 14, 18)
 Pump2 = Motor.Motor(2, 3, 4)
 Pump3 = Motor.Motor(17, 27, 22)
 Pump4 = Motor.Motor(10, 9, 11)

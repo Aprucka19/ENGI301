@@ -13,6 +13,8 @@ GPIO.setmode(GPIO.BCM)
 ShakeStepper = Stepper.Stepper(8, 23, 7)
 SlideStepper = Stepper.Stepper(16, 21, 20)
 
+ShakeStepper.setFreq(1200)
+
 Pump1 = Motor.Motor(14, 15, 18)
 Pump2 = Motor.Motor(2, 3, 4)
 Pump3 = Motor.Motor(17, 27, 22)
@@ -33,7 +35,7 @@ def triggerPump(channel):
 	Pump1.setEn(GPIO.input(Optical1))
 
 
-GPIO.add_event_detect(Optical1, GPIO.BOTH, callback=triggerPump)
+#GPIO.add_event_detect(Optical1, GPIO.BOTH, callback=triggerPump)
 
 
 app = App(layout = "grid")

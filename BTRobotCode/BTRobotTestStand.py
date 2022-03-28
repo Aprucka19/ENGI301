@@ -47,18 +47,19 @@ import RPi.GPIO as GPIO
 #import sys
 #import signal
 
+
 pi = pigpio.pi()
 GPIO.setmode(GPIO.BCM)
 
 #Initilize steppers with their control GPIOS
-ShakeStepper = Stepper.Stepper(8, 23, 7)
+ShakeStepper = Stepper.Stepper(23, 8, 7)
 SlideStepper = Stepper.Stepper(16, 21, 20)
 
 #Increase the speed of shakeStepper from standard 500
 ShakeStepper.setFreq(1200)
 
 #Initilize the pumps
-Pump1 = Motor.Motor(15, 14, 18)
+Pump1 = Motor.Motor(18, 15, 14)
 Pump2 = Motor.Motor(2, 3, 4)
 Pump3 = Motor.Motor(17, 27, 22)
 Pump4 = Motor.Motor(10, 9, 11)
@@ -67,6 +68,8 @@ Pump4 = Motor.Motor(10, 9, 11)
 #Initilize the 2 12 volt motors
 IceMotor = Motor.Motor(24, 5, 6)
 ShakeMotor = Motor.Motor(26, 19, 13)
+
+IceMotor.setDir(0)
 
 
 #Set a port for the signal line of the optical endstop

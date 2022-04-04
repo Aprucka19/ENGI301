@@ -1,3 +1,40 @@
+"""
+--------------------------------------------------------------------------
+PumpInterface.py
+--------------------------------------------------------------------------
+License:   
+Copyright 2022 <Alex Prucka>
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice, this 
+list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice, 
+this list of conditions and the following disclaimer in the documentation 
+and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its contributors 
+may be used to endorse or promote products derived from this software without 
+specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE 
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+--------------------------------------------------------------------------
+An interface for the bartending robots 11 pumps. Allows them to all be initilized
+simultaneously and allows each of the enable, direction, set, and get functions for
+all 11 pumps. Pump 11 uses the standard Motor.py class because of limitations on 
+gpio count on the two MCP23017 chips
+Requirements:
+  - Addresses of the first and second MCP23017 chips
+Uses:
+  - MCP23017
+"""
+
 from Adafruit_I2C import Adafruit_I2C
 from MCP23017 import MCP23017
 import time
@@ -11,6 +48,7 @@ pi = pigpio.pi()
 
 
 class PumpInterface():
+	#the two MCPs and the 11 pumps
 	mcp1 = None
 	mcp2 = None
 	p1 = None
@@ -26,6 +64,7 @@ class PumpInterface():
 	p11 = None
 	
 	def __init__(self, ADD1, ADD2):
+		#Init everything to the relevant GPIO/port
 		self.mcp1 = MCP23017(ADD1, 16)
 		self.mcp2 = MCP23017(ADD2, 16)
 		self.p1 = MotorPump.MotorPump(0, 1, 2, self.mcp1)
@@ -41,7 +80,7 @@ class PumpInterface():
 		self.p11 = Motor.Motor(17, 27, 22)
 		
 
-
+	#No case statements available. Could potentially be done better with list
 	def enabletoggle(self, pump):
 		if(pump == 1):
 			self.p1.enabletoggle()

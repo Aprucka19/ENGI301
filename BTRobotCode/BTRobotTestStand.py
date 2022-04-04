@@ -42,7 +42,7 @@ Uses:
 from time import sleep
 import pigpio
 from guizero import App, Text, PushButton, Slider, TextBox, Box, TitleBox
-import Stepper, Motor
+import Stepper, Motor, PumpInterface
 import RPi.GPIO as GPIO
 #import sys
 #import signal
@@ -59,10 +59,7 @@ SlideStepper = Stepper.Stepper(16, 21, 20)
 ShakeStepper.setFreq(1200)
 
 #Initilize the pumps
-Pump1 = Motor.Motor(18, 15, 14)
-Pump2 = Motor.Motor(2, 3, 4)
-Pump3 = Motor.Motor(17, 27, 22)
-Pump4 = Motor.Motor(10, 9, 11)
+pInt = PumpInterface.PumpInterface(0x20, 0x21)
 
 
 #Initilize the 2 12 volt motors
@@ -92,29 +89,71 @@ def triggerPump(channel):
 
 #Create app and box subsections
 app = App(layout = "grid")
-box1 = TitleBox(app,"Pump Control", layout = "grid", grid = [0,0], align = "left")
+box1 = TitleBox(app,"Pump Control", layout = "grid", grid = [0,1], align = "left")
 
 
-
+'''
 #Create buttons and display values for pumps direction and toggle on/off
-P1T = PushButton(box1, text="Pump1Toggle", grid = [0,1], command=lambda:[Pump1.enabletoggle(), changeText(P1Tmsg, Pump1.getEn())])
-P1Tmsg = Text(box1,text = str(Pump1.getEn()), grid = [1,1])
-P1D = PushButton(box1, text="Pump1Direction", grid = [2,1], command=lambda:[Pump1.dirtoggle(), changeText(P1Dmsg, Pump1.getDir())])
-P1Dmsg = Text(box1,text = str(Pump1.getDir()), grid = [4,1])
-P2T = PushButton(box1, text="Pump2Toggle", grid = [0,2], command=lambda:[Pump2.enabletoggle(), changeText(P2Tmsg, Pump2.getEn())])
-P2Tmsg = Text(box1,text = str(Pump2.getEn()), grid = [1,2])
-P2D = PushButton(box1, text="Pump2Direction", grid = [2,2], command=lambda:[Pump2.dirtoggle(), changeText(P2Dmsg, Pump2.getDir())])
-P2Dmsg = Text(box1,text = str(Pump1.getDir()), grid = [4,2])
-P3T = PushButton(box1, text="Pump3Toggle", grid = [0,3], command=lambda:[Pump3.enabletoggle(), changeText(P3Tmsg, Pump3.getEn())])
-P3Tmsg = Text(box1,text = str(Pump3.getEn()), grid = [1,3])
-P3D = PushButton(box1, text="Pump3Direction", grid = [2,3], command=lambda:[Pump3.dirtoggle(), changeText(P3Dmsg, Pump3.getDir())])
-P3Dmsg = Text(box1,text = str(Pump1.getDir()), grid = [4,3])
-P4T = PushButton(box1, text="Pump4Toggle", grid = [0,4], command=lambda:[Pump4.enabletoggle(), changeText(P4Tmsg, Pump4.getEn())])
-P4Tmsg = Text(box1,text = str(Pump4.getEn()), grid = [1,4])
-P4D = PushButton(box1, text="Pump4Direction", grid = [2,4], command=lambda:[Pump4.dirtoggle(), changeText(P4Dmsg, Pump4.getDir())])
-P4Dmsg = Text(box1,text = str(Pump1.getDir()), grid = [4,4])
+PT = [PushButton(box1, text="Pump"+str(pump+1)+"Toggle", grid = [0,pump+1], command=lambda:[pInt.enabletoggle(pump+1), changeText(PTmsg[pump], pInt.getEn(pump+1))]) for pump in range(11)]
+PTmsg = [Text(box1,text = str(pInt.getEn(pump+1)), grid = [1,pump+1]) for pump in range(11)]
+PD = [PushButton(box1, text="Pump"+str(pump+1)+"Direction", grid = [2,pump+1], command=lambda:[pInt.dirtoggle(pump+1), changeText(PDmsg[pump], pInt.getDir(pump+1))]) for pump in range(11)]
+PDmsg = [Text(box1,text = str(pInt.getDir(pump+1)), grid = [4,pump+1]) for pump in range(11)]
 
-box2 = TitleBox(app,"Stepper Control", layout = "grid", grid = [0,1])
+for i in range(11):
+	pump = i+1
+	PT[pump] = PushButton(box1, text="Pump"+str(pump)+"Toggle", grid = [0,pump], command=lambda:[pInt.enabletoggle(pump), changeText(PTmsg[pump], pInt.getEn(pump))])
+	PTmsg[pump] = Text(box1,text = str(pInt.getEn(pump)), grid = [1,pump])
+	PD[pump] = PushButton(box1, text="Pump"+str(pump)+"Direction", grid = [2,pump], command=lambda:[pInt.dirtoggle(pump), changeText(PDmsg[pump], pInt.getDir(pump))])
+	PDmsg[pump] = Text(box1,text = str(pInt.getDir(pump)), grid = [4,pump])
+'''
+
+
+P1T = PushButton(box1, text="Pump1Toggle", grid = [0,1], command=lambda:[pInt.enabletoggle(1), changeText(P1Tmsg, pInt.getEn(1))])
+P1Tmsg = Text(box1,text = str(pInt.getEn(1)), grid = [1,1])
+P1D = PushButton(box1, text="Pump1Direction", grid = [2,1], command=lambda:[pInt.dirtoggle(1), changeText(P1Dmsg, pInt.getDir(1))])
+P1Dmsg = Text(box1,text = str(pInt.getDir(1)), grid = [4,1])
+P2T = PushButton(box1, text="Pump2Toggle", grid = [0,2], command=lambda:[pInt.enabletoggle(2), changeText(P2Tmsg, pInt.getEn(2))])
+P2Tmsg = Text(box1,text = str(pInt.getEn(2)), grid = [1,2])
+P2D = PushButton(box1, text="Pump2Direction", grid = [2,2], command=lambda:[pInt.dirtoggle(2), changeText(P2Dmsg, pInt.getDir(2))])
+P2Dmsg = Text(box1,text = str(pInt.getDir(2)), grid = [4,2])
+P3T = PushButton(box1, text="Pump3Toggle", grid = [0,3], command=lambda:[pInt.enabletoggle(3), changeText(P3Tmsg, pInt.getEn(3))])
+P3Tmsg = Text(box1,text = str(pInt.getEn(3)), grid = [1,3])
+P3D = PushButton(box1, text="Pump3Direction", grid = [2,3], command=lambda:[pInt.dirtoggle(3), changeText(P3Dmsg, pInt.getDir(3))])
+P3Dmsg = Text(box1,text = str(pInt.getDir(3)), grid = [4,3])
+P4T = PushButton(box1, text="Pump4Toggle", grid = [0,4], command=lambda:[pInt.enabletoggle(4), changeText(P4Tmsg, pInt.getEn(4))])
+P4Tmsg = Text(box1,text = str(pInt.getEn(4)), grid = [1,4])
+P4D = PushButton(box1, text="Pump4Direction", grid = [2,4], command=lambda:[pInt.dirtoggle(4), changeText(P4Dmsg, pInt.getDir(4))])
+P4Dmsg = Text(box1,text = str(pInt.getDir(4)), grid = [4,4])
+P5T = PushButton(box1, text="Pump5Toggle", grid = [0,5], command=lambda:[pInt.enabletoggle(5), changeText(P5Tmsg, pInt.getEn(5))])
+P5Tmsg = Text(box1,text = str(pInt.getEn(5)), grid = [1,5])
+P5D = PushButton(box1, text="Pump5Direction", grid = [2,5], command=lambda:[pInt.dirtoggle(5), changeText(P5Dmsg, pInt.getDir(5))])
+P5Dmsg = Text(box1,text = str(pInt.getDir(5)), grid = [4,5])
+P6T = PushButton(box1, text="Pump6Toggle", grid = [0,6], command=lambda:[pInt.enabletoggle(6), changeText(P6Tmsg, pInt.getEn(6))])
+P6Tmsg = Text(box1,text = str(pInt.getEn(6)), grid = [1,6])
+P6D = PushButton(box1, text="Pump6Direction", grid = [2,6], command=lambda:[pInt.dirtoggle(6), changeText(P6Dmsg, pInt.getDir(6))])
+P6Dmsg = Text(box1,text = str(pInt.getDir(6)), grid = [4,6])
+P7T = PushButton(box1, text="Pump7Toggle", grid = [0,7], command=lambda:[pInt.enabletoggle(7), changeText(P7Tmsg, pInt.getEn(7))])
+P7Tmsg = Text(box1,text = str(pInt.getEn(7)), grid = [1,7])
+P7D = PushButton(box1, text="Pump7Direction", grid = [2,7], command=lambda:[pInt.dirtoggle(7), changeText(P7Dmsg, pInt.getDir(7))])
+P7Dmsg = Text(box1,text = str(pInt.getDir(7)), grid = [4,7])
+P8T = PushButton(box1, text="Pump8Toggle", grid = [0,8], command=lambda:[pInt.enabletoggle(8), changeText(P8Tmsg, pInt.getEn(8))])
+P8Tmsg = Text(box1,text = str(pInt.getEn(8)), grid = [1,8])
+P8D = PushButton(box1, text="Pump8Direction", grid = [2,8], command=lambda:[pInt.dirtoggle(8), changeText(P8Dmsg, pInt.getDir(8))])
+P8Dmsg = Text(box1,text = str(pInt.getDir(8)), grid = [4,8])
+P9T = PushButton(box1, text="Pump9Toggle", grid = [0,9], command=lambda:[pInt.enabletoggle(9), changeText(P9Tmsg, pInt.getEn(9))])
+P9Tmsg = Text(box1,text = str(pInt.getEn(9)), grid = [1,9])
+P9D = PushButton(box1, text="Pump9Direction", grid = [2,9], command=lambda:[pInt.dirtoggle(9), changeText(P9Dmsg, pInt.getDir(9))])
+P9Dmsg = Text(box1,text = str(pInt.getDir(9)), grid = [4,9])
+P10T = PushButton(box1, text="Pump10Toggle", grid = [0,10], command=lambda:[pInt.enabletoggle(10), changeText(P10Tmsg, pInt.getEn(10))])
+P10Tmsg = Text(box1,text = str(pInt.getEn(10)), grid = [1,10])
+P10D = PushButton(box1, text="Pump10Direction", grid = [2,10], command=lambda:[pInt.dirtoggle(10), changeText(P10Tmsg, pInt.getDir(10))])
+P10Dmsg = Text(box1,text = str(pInt.getDir(10)), grid = [4,10])
+P11T = PushButton(box1, text="Pump11Toggle", grid = [0,11], command=lambda:[pInt.enabletoggle(11), changeText(P11Tmsg, pInt.getEn(11))])
+P11Tmsg = Text(box1,text = str(pInt.getEn(11)), grid = [1,11])
+P11D = PushButton(box1, text="Pump11Direction", grid = [2,11], command=lambda:[pInt.dirtoggle(11), changeText(P11Dmsg, pInt.getDir(11))])
+P11Dmsg = Text(box1,text = str(pInt.getDir(11)), grid = [4,11])
+
+box2 = TitleBox(app,"Stepper Control", layout = "grid", grid = [1,1])
 
 #Create buttons and display values for stepper direction, enable, and toggle on/off
 ShakeT = PushButton(box2, text="Shake Toggle", grid = [0,1], command=lambda:[ShakeStepper.enabletoggle(), changeText(ShakeTmsg, ShakeStepper.getEn())])
@@ -133,7 +172,7 @@ SlideMmsg = Text(box2,text = str(SlideStepper.getDuty()), grid = [5,2])
 
 
 #Create buttons and display values for 12V motors direction and toggle on/off
-box3 = TitleBox(app,"Motor Control", layout = "grid", grid = [0,2], align = "left")
+box3 = TitleBox(app,"Motor Control", layout = "grid", grid = [2,1], align = "left")
 ShakeMotorT = PushButton(box3, text="Shake Motor Toggle", grid = [0,1], command=lambda:[ShakeMotor.enabletoggle(), changeText(ShakeMotorTmsg, ShakeMotor.getEn())])
 ShakeMotorTmsg = Text(box3, text = str(ShakeMotor.getEn()), grid = [1,1])
 ShakeMotorD = PushButton(box3, text="Shake Motor Direction", grid = [2,1], command=lambda:[ShakeMotor.dirtoggle(), changeText(ShakeMotorDmsg, ShakeMotor.getDir())])

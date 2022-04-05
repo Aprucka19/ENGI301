@@ -15,5 +15,8 @@ The run executable currently calls the TestStand function, and the autostart fil
 automatically execute it, as explained in the following forum post
 https://forums.raspberrypi.com/viewtopic.php?t=237218&start=25
 
+Necesary installs: 
 
-
+sudo pip3 install guizero
+sudo apt-get install -y python-smbus
+sudo apt-get install -y i2c-tools

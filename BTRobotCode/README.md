@@ -22,3 +22,5 @@ sudo pip3 install guizero
 sudo apt-get install -y python-smbus
 
 sudo apt-get install -y i2c-tools
+
+sudo systemctl enable pigpiod (to enable pigpiod on boot always)

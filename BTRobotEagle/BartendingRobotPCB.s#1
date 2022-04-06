@@ -2646,6 +2646,20 @@
 <busses>
 </busses>
 <nets>
+<net name="3.3V" class="0">
+<segment>
+<pinref part="SLIDESTOP" gate="G$1" pin="1"/>
+<wire x1="38.1" y1="73.66" x2="12.7" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="73.66" x2="12.7" y2="53.34" width="0.1524" layer="91"/>
+<pinref part="BARSTOP" gate="G$1" pin="1"/>
+<wire x1="12.7" y1="53.34" x2="12.7" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="33.02" x2="38.1" y2="33.02" width="0.1524" layer="91"/>
+<pinref part="SHAKESTOP" gate="G$1" pin="1"/>
+<wire x1="38.1" y1="53.34" x2="12.7" y2="53.34" width="0.1524" layer="91"/>
+<junction x="12.7" y="53.34"/>
+<label x="12.7" y="53.34" size="1.778" layer="95" rot="R180"/>
+</segment>
+</net>
 <net name="CGND" class="0">
 <segment>
 <pinref part="SUPPLY16" gate="G$1" pin="CGND"/>
@@ -2682,20 +2696,6 @@
 <pinref part="SLIDESTOP" gate="G$1" pin="3"/>
 <wire x1="38.1" y1="68.58" x2="35.56" y2="68.58" width="0.1524" layer="91"/>
 <label x="43.18" y="68.58" size="1.778" layer="95" rot="R180"/>
-</segment>
-</net>
-<net name="5V" class="0">
-<segment>
-<pinref part="SLIDESTOP" gate="G$1" pin="1"/>
-<wire x1="38.1" y1="73.66" x2="12.7" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="73.66" x2="12.7" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="BARSTOP" gate="G$1" pin="1"/>
-<wire x1="12.7" y1="53.34" x2="12.7" y2="33.02" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="33.02" x2="38.1" y2="33.02" width="0.1524" layer="91"/>
-<pinref part="SHAKESTOP" gate="G$1" pin="1"/>
-<wire x1="38.1" y1="53.34" x2="12.7" y2="53.34" width="0.1524" layer="91"/>
-<junction x="12.7" y="53.34"/>
-<label x="12.7" y="53.34" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
 </nets>

@@ -472,9 +472,6 @@
 <circle x="-4.75" y="0" radius="0.1" width="0.2" layer="51"/>
 <pad name="P" x="-1.25" y="0" drill="0.7" diameter="1.05" shape="square"/>
 <pad name="N" x="1.25" y="0" drill="0.7" diameter="1.05"/>
-<wire x1="-2" y1="3" x2="-2" y2="1" width="0.1524" layer="21"/>
-<wire x1="-3" y1="2" x2="-1" y2="2" width="0.1524" layer="21"/>
-<wire x1="1" y1="-2" x2="3" y2="-2" width="0.1524" layer="21"/>
 </package>
 <package name="691201720002">
 <description>&lt;b&gt;WR-TBL Serie 201 - 5.0mm 45° Entry Modular with Rising Cage Clamp - 3.5mm2 Wires, 2 Pins</description>

@@ -422,6 +422,9 @@
 <circle x="-4.75" y="0" radius="0.1" width="0.2" layer="51"/>
 <pad name="P" x="-1.25" y="0" drill="0.7" diameter="1.05" shape="square"/>
 <pad name="N" x="1.25" y="0" drill="0.7" diameter="1.05"/>
+<wire x1="-2" y1="3" x2="-2" y2="1" width="0.1524" layer="21"/>
+<wire x1="-3" y1="2" x2="-1" y2="2" width="0.1524" layer="21"/>
+<wire x1="1" y1="-2" x2="3" y2="-2" width="0.1524" layer="21"/>
 </package>
 <package name="L298N">
 <wire x1="-21.5" y1="-21.5" x2="-21.5" y2="21.5" width="0.127" layer="21"/>
@@ -444,14 +447,14 @@
 <pad name="12V" x="-18" y="11.5" drill="1" shape="square"/>
 </package>
 <package name="10MMCAP">
-<circle x="0" y="0" radius="5" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="4" width="0.1524" layer="21"/>
 <pad name="+" x="-2.75" y="0" drill="0.6" shape="square"/>
 <pad name="-" x="2.75" y="0" drill="0.6" shape="square"/>
-<wire x1="-3" y1="3" x2="-3" y2="1" width="0.1524" layer="21"/>
-<wire x1="-4" y1="2" x2="-2" y2="2" width="0.1524" layer="21"/>
-<wire x1="2" y1="-2" x2="4" y2="-2" width="0.1524" layer="21"/>
-<text x="-3" y="6" size="1.778" layer="25" font="vector">&gt;NAME</text>
-<text x="-3" y="-7" size="1.778" layer="27" font="vector">&gt;VALUE</text>
+<wire x1="-2" y1="3" x2="-2" y2="1" width="0.1524" layer="21"/>
+<wire x1="-3" y1="2" x2="-1" y2="2" width="0.1524" layer="21"/>
+<wire x1="1" y1="-2" x2="3" y2="-2" width="0.1524" layer="21"/>
+<text x="-3" y="5" size="1.778" layer="25" font="vector">&gt;NAME</text>
+<text x="-3" y="-6" size="1.778" layer="27" font="vector">&gt;VALUE</text>
 </package>
 <package name="2PORTSCREW">
 <pad name="P1" x="-2.5" y="0" drill="1" shape="square"/>
@@ -1868,18 +1871,6 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="378.46" y1="55.88" x2="365.76" y2="55.88" width="0.1524" layer="91"/>
 <junction x="365.76" y="55.88"/>
 </segment>
-<segment>
-<pinref part="SLIDESTOP" gate="G$1" pin="1"/>
-<wire x1="223.52" y1="149.86" x2="198.12" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="198.12" y1="149.86" x2="198.12" y2="129.54" width="0.1524" layer="91"/>
-<pinref part="BARSTOP" gate="G$1" pin="1"/>
-<wire x1="198.12" y1="129.54" x2="198.12" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="198.12" y1="109.22" x2="223.52" y2="109.22" width="0.1524" layer="91"/>
-<pinref part="SHAKESTOP" gate="G$1" pin="1"/>
-<wire x1="223.52" y1="129.54" x2="198.12" y2="129.54" width="0.1524" layer="91"/>
-<junction x="198.12" y="129.54"/>
-<label x="198.12" y="129.54" size="1.778" layer="95" rot="R180"/>
-</segment>
 </net>
 <net name="3.3V" class="0">
 <segment>
@@ -1929,6 +1920,18 @@ DIN A3, landscape with location and doc. field</description>
 <pinref part="SLIDESTEP" gate="G$1" pin="!RST"/>
 <wire x1="287.02" y1="193.04" x2="284.48" y2="193.04" width="0.1524" layer="91"/>
 <label x="284.48" y="193.04" size="1.778" layer="95" rot="R180"/>
+</segment>
+<segment>
+<pinref part="SLIDESTOP" gate="G$1" pin="1"/>
+<wire x1="223.52" y1="149.86" x2="198.12" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="149.86" x2="198.12" y2="129.54" width="0.1524" layer="91"/>
+<pinref part="BARSTOP" gate="G$1" pin="1"/>
+<wire x1="198.12" y1="129.54" x2="198.12" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="109.22" x2="223.52" y2="109.22" width="0.1524" layer="91"/>
+<pinref part="SHAKESTOP" gate="G$1" pin="1"/>
+<wire x1="223.52" y1="129.54" x2="198.12" y2="129.54" width="0.1524" layer="91"/>
+<junction x="198.12" y="129.54"/>
+<label x="198.12" y="129.54" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
 <net name="ICEEN" class="0">
@@ -2868,50 +2871,49 @@ DIN A3, landscape with location and doc. field</description>
 </sheet>
 </sheets>
 <errors>
-<approved hash="104,1,83.82,78.74,PI,5V0,5V,,,"/>
-<approved hash="104,1,83.82,76.2,PI,3V3,3.3V,,,"/>
-<approved hash="104,1,83.82,22.86,PI,GND,CGND,,,"/>
-<approved hash="204,1,83.82,25.4,PI,SHIELD,,,,"/>
-<approved hash="104,2,-101.6,50.8,PC1,GND,CGND,,,"/>
-<approved hash="104,2,-101.6,78.74,PC1,VS,8.6V,,,"/>
-<approved hash="104,2,-101.6,76.2,PC1,VSS,5V,,,"/>
-<approved hash="104,2,-101.6,5.08,PC2,GND,CGND,,,"/>
-<approved hash="104,2,-101.6,33.02,PC2,VS,8.6V,,,"/>
-<approved hash="104,2,-101.6,30.48,PC2,VSS,5V,,,"/>
-<approved hash="104,2,-101.6,-45.72,PC3,GND,CGND,,,"/>
-<approved hash="104,2,-101.6,-17.78,PC3,VS,8.6V,,,"/>
-<approved hash="104,2,-101.6,-20.32,PC3,VSS,5V,,,"/>
-<approved hash="104,2,-15.24,50.8,PC4,GND,CGND,,,"/>
-<approved hash="104,2,-15.24,78.74,PC4,VS,8.6V,,,"/>
-<approved hash="104,2,-15.24,76.2,PC4,VSS,5V,,,"/>
-<approved hash="104,2,-15.24,5.08,PC5,GND,CGND,,,"/>
-<approved hash="104,2,-15.24,33.02,PC5,VS,8.6V,,,"/>
-<approved hash="104,2,-15.24,30.48,PC5,VSS,5V,,,"/>
-<approved hash="104,2,-15.24,-45.72,PC6,GND,CGND,,,"/>
-<approved hash="202,2,-55.88,-38.1,PC6,INPUT3,,,,"/>
-<approved hash="202,2,-55.88,-40.64,PC6,INPUT4,,,,"/>
-<approved hash="202,2,-55.88,-27.94,PC6,ENABLE2,,,,"/>
-<approved hash="104,2,-15.24,-17.78,PC6,VS,8.6V,,,"/>
-<approved hash="104,2,-15.24,-20.32,PC6,VSS,5V,,,"/>
-<approved hash="104,2,-12.7,106.68,U10,VDD,3.3V,,,"/>
-<approved hash="104,2,-63.5,106.68,U10,VSS,CGND,,,"/>
-<approved hash="104,2,-86.36,106.68,U11,VDD,3.3V,,,"/>
-<approved hash="104,2,-137.16,106.68,U11,VSS,CGND,,,"/>
-<approved hash="202,3,-17.78,33.02,SHAKESTEP,!EN,,,,"/>
-<approved hash="202,3,-17.78,17.78,SHAKESTEP,M0,,,,"/>
-<approved hash="202,3,-17.78,15.24,SHAKESTEP,M1,,,,"/>
-<approved hash="202,3,-17.78,12.7,SHAKESTEP,M2,,,,"/>
-<approved hash="104,3,17.78,38.1,SHAKESTEP,VMOT,12V,,,"/>
-<approved hash="104,3,17.78,7.62,SHAKESTEP,GND,CGND,,,"/>
-<approved hash="104,3,17.78,10.16,SHAKESTEP,GND_MOT,CGND,,,"/>
-<approved hash="202,3,-17.78,-15.24,SLIDESTEP,!EN,,,,"/>
-<approved hash="202,3,-17.78,-30.48,SLIDESTEP,M0,,,,"/>
-<approved hash="202,3,-17.78,-35.56,SLIDESTEP,M2,,,,"/>
-<approved hash="104,3,17.78,-10.16,SLIDESTEP,VMOT,12V,,,"/>
-<approved hash="104,3,17.78,-40.64,SLIDESTEP,GND,CGND,,,"/>
-<approved hash="104,3,17.78,-38.1,SLIDESTEP,GND_MOT,CGND,,,"/>
-<approved hash="106,2,-132.08,106.68,N$20,,,,,"/>
-<approved hash="106,2,-58.42,106.68,N$42,,,,,"/>
+<approved hash="104,1,246.38,246.38,PI,5V0,5V,,,"/>
+<approved hash="104,1,246.38,243.84,PI,3V3,3.3V,,,"/>
+<approved hash="104,1,246.38,190.5,PI,GND,CGND,,,"/>
+<approved hash="104,1,246.38,193.04,PI,SHIELD,CGND,,,"/>
+<approved hash="104,1,53.34,111.76,PC1,GND,CGND,,,"/>
+<approved hash="104,1,53.34,139.7,PC1,VS,8.6V,,,"/>
+<approved hash="104,1,53.34,137.16,PC1,VSS,5V,,,"/>
+<approved hash="104,1,53.34,66.04,PC2,GND,CGND,,,"/>
+<approved hash="104,1,53.34,93.98,PC2,VS,8.6V,,,"/>
+<approved hash="104,1,53.34,91.44,PC2,VSS,5V,,,"/>
+<approved hash="104,1,53.34,15.24,PC3,GND,CGND,,,"/>
+<approved hash="104,1,53.34,43.18,PC3,VS,8.6V,,,"/>
+<approved hash="104,1,53.34,40.64,PC3,VSS,5V,,,"/>
+<approved hash="104,1,139.7,111.76,PC4,GND,CGND,,,"/>
+<approved hash="104,1,139.7,139.7,PC4,VS,8.6V,,,"/>
+<approved hash="104,1,139.7,137.16,PC4,VSS,5V,,,"/>
+<approved hash="104,1,139.7,66.04,PC5,GND,CGND,,,"/>
+<approved hash="104,1,139.7,93.98,PC5,VS,8.6V,,,"/>
+<approved hash="104,1,139.7,91.44,PC5,VSS,5V,,,"/>
+<approved hash="104,1,139.7,15.24,PC6,GND,CGND,,,"/>
+<approved hash="202,1,99.06,22.86,PC6,INPUT3,,,,"/>
+<approved hash="202,1,99.06,20.32,PC6,INPUT4,,,,"/>
+<approved hash="202,1,99.06,33.02,PC6,ENABLE2,,,,"/>
+<approved hash="104,1,139.7,43.18,PC6,VS,8.6V,,,"/>
+<approved hash="104,1,139.7,40.64,PC6,VSS,5V,,,"/>
+<approved hash="104,1,137.16,236.22,MCP2,VDD,3.3V,,,"/>
+<approved hash="104,1,137.16,185.42,MCP2,VSS,CGND,,,"/>
+<approved hash="104,1,55.88,236.22,MCP1,VDD,3.3V,,,"/>
+<approved hash="104,1,55.88,185.42,MCP1,VSS,CGND,,,"/>
+<approved hash="202,1,287.02,243.84,SHAKESTEP,!EN,,,,"/>
+<approved hash="202,1,287.02,228.6,SHAKESTEP,M0,,,,"/>
+<approved hash="202,1,287.02,226.06,SHAKESTEP,M1,,,,"/>
+<approved hash="202,1,287.02,223.52,SHAKESTEP,M2,,,,"/>
+<approved hash="104,1,322.58,248.92,SHAKESTEP,VMOT,12V,,,"/>
+<approved hash="104,1,322.58,218.44,SHAKESTEP,GND,CGND,,,"/>
+<approved hash="104,1,322.58,220.98,SHAKESTEP,GND_MOT,CGND,,,"/>
+<approved hash="202,1,287.02,195.58,SLIDESTEP,!EN,,,,"/>
+<approved hash="202,1,287.02,180.34,SLIDESTEP,M0,,,,"/>
+<approved hash="202,1,287.02,175.26,SLIDESTEP,M2,,,,"/>
+<approved hash="104,1,322.58,200.66,SLIDESTEP,VMOT,12V,,,"/>
+<approved hash="104,1,322.58,170.18,SLIDESTEP,GND,CGND,,,"/>
+<approved hash="104,1,322.58,172.72,SLIDESTEP,GND_MOT,CGND,,,"/>
+<approved hash="113,1,193.571,130.071,FRAME1,,,,,"/>
 </errors>
 </schematic>
 </drawing>

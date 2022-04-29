@@ -1,6 +1,8 @@
 ## Bartending Robot Project Code
 
 This repository holds code for the bartening robot. 
+Thurough documentation on the robot itself is held here: 
+https://www.hackster.io/ap83/automatic-bartending-robot-bc4bf1
 
 Currently within the repository there is at test folder with code I used to 
 test individual components of the project.

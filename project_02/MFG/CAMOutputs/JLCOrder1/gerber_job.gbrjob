@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2022-04-13T04:09:45Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.6.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.53,
+        "LayerNumber": 4,
+        "Name": {
+            "ProjectId": "BartendingRobotPCB"
+        },
+        "Owner": "Alex Prucka <awp@prucka.com>",
+        "Size": {
+            "X": 162.56,
+            "Y": 100.33
+        }
+    }
+}
